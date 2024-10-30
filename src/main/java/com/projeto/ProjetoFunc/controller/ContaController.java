@@ -11,15 +11,16 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/contas")
+@CrossOrigin(origins = "http://localhost:3000")
 public class ContaController {
     @Autowired
     private ContaService contaService;
 
     @PostMapping("/{pessoaId}")
-    public ResponseEntity<Conta> cadastrarConta(@PathVariable Long pessoaId, @RequestBody Conta conta) {
+    public ResponseEntity<List<Conta>> cadastrarContas(@PathVariable Long pessoaId, @RequestBody List<Conta> contas) {
         try {
-            Conta novaConta = contaService.cadastrarConta(pessoaId, conta);
-            return ResponseEntity.status(HttpStatus.CREATED).body(novaConta);
+            List<Conta> novasContas = contaService.cadastrarContas(pessoaId, contas);
+            return ResponseEntity.status(HttpStatus.CREATED).body(novasContas);
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.BAD_REQUEST).body(null);
         }

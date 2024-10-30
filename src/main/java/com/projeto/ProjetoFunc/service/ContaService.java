@@ -7,7 +7,7 @@ import com.projeto.ProjetoFunc.repository.PessoaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -18,16 +18,18 @@ public class ContaService {
     @Autowired
     private PessoaRepository pessoaRepository;
 
-    public Conta cadastrarConta(Long pessoaId, Conta conta) throws Exception {
-        Pessoa pessoa = pessoaRepository.findById(pessoaId)
-                .orElseThrow(() -> new Exception("Pessoa não encontrada"));
-        conta.setPessoa(pessoa);
+    public List<Conta> cadastrarContas(Long pessoaId, List<Conta> contas) {
+        List<Conta> contasCriadas = new ArrayList<>();
+        // Busca a pessoa associada pelo ID
+        Pessoa pessoa = pessoaRepository.findById(pessoaId).orElse(null);
 
-        if (!"Corrente".equals(conta.getTipoConta()) && conta.getLimite().compareTo(BigDecimal.ZERO) > 0) {
-            throw new IllegalArgumentException("Somente contas Corrente podem ter limite maior que 0.");
+        if (pessoa != null) {
+            for (Conta conta : contas) {
+                conta.setPessoa(pessoa); // Associa a conta à pessoa
+                contasCriadas.add(contaRepository.save(conta)); // Salva a conta
+            }
         }
-
-        return contaRepository.save(conta);
+        return contasCriadas;
     }
 
     public List<Conta> listarContas() {
