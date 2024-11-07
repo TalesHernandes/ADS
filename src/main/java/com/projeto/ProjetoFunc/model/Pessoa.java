@@ -1,8 +1,6 @@
 package com.projeto.ProjetoFunc.model;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import java.util.*;
 
@@ -64,5 +62,16 @@ public class Pessoa {
 
     public void setContas(List<Conta> contas) {
         this.contas = contas;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":" + id +
+                ", \"nome\":\"" + nome + '\"' +
+                ", \"parentesco\":\"" + parentesco + '\"' +
+                ", \"admin\":" + admin +
+                ", \"contas\":" + contas +
+                '}';
     }
 }

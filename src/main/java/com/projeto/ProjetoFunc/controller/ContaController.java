@@ -41,4 +41,34 @@ public class ContaController {
     public List<Conta> listarContasPorPessoa(@PathVariable Long pessoaId) {
         return contaService.listarContasPorPessoa(pessoaId);
     }
+
+    @PutMapping("/transferir/{idContaOrigem}/{idContaDestino}/{valor}")
+    public ResponseEntity<String> transferir(@PathVariable Long idContaOrigem, @PathVariable Long idContaDestino, @PathVariable Double valor) {
+        try {
+            Conta contaOrigem = contaService.transferir(idContaOrigem, idContaDestino, valor);
+            return ResponseEntity.ok(contaOrigem.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/sacar/{idConta}/{valor}")
+    public ResponseEntity<String> sacar(@PathVariable Long idConta, @PathVariable Double valor) {
+        try {
+            Conta conta = contaService.sacar(idConta, valor);
+            return ResponseEntity.ok(conta.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("/depositar/{idConta}/{valor}")
+    public ResponseEntity<String> depositar(@PathVariable Long idConta, @PathVariable Double valor) {
+        try {
+            Conta conta = contaService.depositar(idConta, valor);
+            return ResponseEntity.ok(conta.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

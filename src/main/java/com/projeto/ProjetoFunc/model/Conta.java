@@ -14,9 +14,9 @@ public class Conta {
     @Column(nullable = false, length = 20)
     private String tipoConta;
 
-    private BigDecimal saldo = BigDecimal.ZERO;
+    private double saldo = 0.0;
 
-    private BigDecimal limite = BigDecimal.ZERO;
+    private double limite = 0.0;
 
     @ManyToOne
     @JoinColumn(name = "usuario_associado", nullable = false)
@@ -41,19 +41,19 @@ public class Conta {
         this.tipoConta = tipoConta;
     }
 
-    public BigDecimal getSaldo() {
+    public double getSaldo() {
         return saldo;
     }
 
-    public void setSaldo(BigDecimal saldo) {
+    public void setSaldo(double saldo) {
         this.saldo = saldo;
     }
 
-    public BigDecimal getLimite() {
+    public double getLimite() {
         return limite;
     }
 
-    public void setLimite(BigDecimal limite) {
+    public void setLimite(double limite) {
         this.limite = limite;
     }
 
@@ -63,5 +63,15 @@ public class Conta {
 
     public void setPessoa(Pessoa pessoa) {
         this.pessoa = pessoa;
+    }
+
+    @Override
+    public String toString() {
+        return "{" +
+                "\"id\":" + id +
+                ", \"tipoConta\":\"" + tipoConta + '\"' +
+                ", \"saldo\":" + saldo +
+                ", \"limite\":" + limite +
+                '}';
     }
 }
