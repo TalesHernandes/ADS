@@ -72,7 +72,7 @@ public class ContaController {
         }
     }
 
-    @PutMapping("/limites/{idConta}/{novoLimite}")
+    @PutMapping("/limite/{idConta}/{novoLimite}")
     public ResponseEntity<String> alterarLimite(@PathVariable Long idConta, @PathVariable Double novoLimite) {
         try {
             Conta conta = contaService.alterarLimite(idConta, novoLimite);
