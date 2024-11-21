@@ -71,4 +71,14 @@ public class ContaController {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
     }
+
+    @PutMapping("/limites/{idConta}/{novoLimite}")
+    public ResponseEntity<String> alterarLimite(@PathVariable Long idConta, @PathVariable Double novoLimite) {
+        try {
+            Conta conta = contaService.alterarLimite(idConta, novoLimite);
+            return ResponseEntity.ok(conta.toString());
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

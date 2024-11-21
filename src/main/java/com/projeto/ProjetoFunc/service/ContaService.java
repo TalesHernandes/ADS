@@ -111,4 +111,17 @@ public class ContaService {
 
         return conta;
     }
+
+    public Conta alterarLimite(Long idConta, Double novoLimite) {
+        Conta conta = contaRepository.findById(idConta).orElse(null);
+
+        if (conta == null) {
+            throw new IllegalArgumentException("Conta não encontrada");
+        }
+
+        conta.setLimite(novoLimite);
+        contaRepository.save(conta);
+
+        return conta;
+    }
 }
