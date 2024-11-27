@@ -2,8 +2,6 @@ package com.projeto.ProjetoFunc.model;
 
 import jakarta.persistence.*;
 
-import java.util.Objects;
-
 /**
  -- TABELA EXTRATO PARA PROJETO
  CREATE TABLE Extrato (
