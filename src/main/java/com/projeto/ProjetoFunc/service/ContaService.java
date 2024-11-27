@@ -1,9 +1,11 @@
 package com.projeto.ProjetoFunc.service;
 
 import com.projeto.ProjetoFunc.model.Conta;
+import com.projeto.ProjetoFunc.model.Extrato;
 import com.projeto.ProjetoFunc.model.Pessoa;
 import com.projeto.ProjetoFunc.repository.ContaRepository;
 import com.projeto.ProjetoFunc.repository.PessoaRepository;
+import com.projeto.ProjetoFunc.repository.ExtratoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +19,9 @@ public class ContaService {
 
     @Autowired
     private PessoaRepository pessoaRepository;
+
+    @Autowired
+    private ExtratoRepository extratoRepository;
 
     public List<Conta> cadastrarContas(Long pessoaId, List<Conta> contas) {
         List<Conta> contasCriadas = new ArrayList<>();
@@ -71,6 +76,14 @@ public class ContaService {
         contaOrigem.setSaldo(contaOrigem.getSaldo() - valor);
         contaDestino.setSaldo(contaDestino.getSaldo() + valor);
 
+        Extrato extrato = new Extrato();
+        extrato.setContaInicio(idContaOrigem.intValue());
+        extrato.setContafim(idContaDestino.intValue());
+        extrato.setValor(valor);
+        extrato.setData(new java.sql.Timestamp(System.currentTimeMillis()).toString());
+        extrato.setTipoOperacao("Transferência");
+        extratoRepository.save(extrato);
+
         contaRepository.save(contaOrigem);
         contaRepository.save(contaDestino);
 
@@ -94,6 +107,15 @@ public class ContaService {
         }
 
         conta.setSaldo(conta.getSaldo() - valor);
+
+        Extrato extrato = new Extrato();
+        extrato.setContaInicio(idConta.intValue());
+        extrato.setContafim(null);
+        extrato.setValor(valor);
+        extrato.setData(new java.sql.Timestamp(System.currentTimeMillis()).toString());
+        extrato.setTipoOperacao("Saque");
+        extratoRepository.save(extrato);
+
         contaRepository.save(conta);
 
         return conta;
@@ -107,6 +129,15 @@ public class ContaService {
         }
 
         conta.setSaldo(conta.getSaldo() + valor);
+
+        Extrato extrato = new Extrato();
+        extrato.setContaInicio(idConta.intValue());
+        extrato.setContafim(null);
+        extrato.setValor(valor);
+        extrato.setData(new java.sql.Timestamp(System.currentTimeMillis()).toString());
+        extrato.setTipoOperacao("Deposito");
+        extratoRepository.save(extrato);
+
         contaRepository.save(conta);
 
         return conta;
