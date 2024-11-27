@@ -2,7 +2,6 @@ import "../styles.css";
 import logoStar from "../imgs/Star.png";
 import userIcon from "../imgs/UserIcon.png";
 import nova from "../imgs/nova.png"
-import { Link } from "react-router-dom";
 import React, { useState, useEffect } from "react";
 import axios from 'axios';
 import DependentesSelect from "../componentes/DependentesSelect"; 
@@ -24,7 +23,7 @@ export default function Transferir() {
       
       const fetchPessoa = async () => {
         try {
-            const response = await axios.get('http://localhost:8080/api/pessoas/4');
+            const response = await axios.get('http://54.80.120.211:8080/api/pessoas/4');
             setPessoa(response.data);
             setIsAdmin(response.data.admin);
         } catch (error) {
@@ -39,7 +38,7 @@ export default function Transferir() {
       
       const fetchDependentes = async () => {
           try {
-              const response = await axios.get('http://localhost:8080/api/pessoas');
+              const response = await axios.get('http://54.80.120.211:8080/api/pessoas');
               const dependentesFiltrados = response.data.filter(pessoa => !pessoa.admin); // Filtrando apenas dependentes
               setDependentes(dependentesFiltrados);
           } catch (error) {
@@ -68,7 +67,7 @@ export default function Transferir() {
     const handleAddDependente = async (novoDependente) => {
       try {
           // Envia os dados do novo dependente e as contas em uma única requisição
-          const response = await axios.post('http://localhost:8080/api/pessoas', novoDependente);
+          const response = await axios.post('http://54.80.120.211:8080/api/pessoas', novoDependente);
           console.log('Resposta da API:', response.data);
           
           // Adiciona o novo dependente à lista de dependentes
@@ -92,7 +91,7 @@ export default function Transferir() {
       };
   
       try {
-          const response = await axios.post(`http://localhost:8080/api/contas/${pessoaId}`, [novaConta]);
+          const response = await axios.post(`http://54.80.120.211:8080/api/contas/${pessoaId}`, [novaConta]);
           console.log('Nova conta criada:', response.data);
   
           if (dependenteSelecionado) {
@@ -117,22 +116,7 @@ export default function Transferir() {
 
     return (
       <div className="pagina">
-      <style>
-        @import
-        url('https://fonts.googleapis.com/css2?family=Agdasima:wght@700&display=swap');
-      </style>
-      <header className="cabecalho">
-        <div className="logo">
-          <img src={logoStar} alt="Star Tech" />
-          <h1>Tech - Controle de Contas</h1>
-        </div>
-        <div className="informacoes-topo">
-          <div className="configuracoes">
-            <Link to="/" className="pagina-inicial">Pagina Inicial</Link>
-            <button className="aumentar-fonte">A+</button>
-          </div>
-        </div>
-      </header>
+      <a href="/">Página Inicial</a>
 
       <main className="conteudo-principal">
         <section className="blocoMaior">
@@ -195,7 +179,7 @@ export default function Transferir() {
             
             {isAdmin && !dependenteSelecionado && (
               <>
-              <p className="novoDependente"  >Novo Dependente</p>
+              <p className="novoDependente">Novo Dependente</p>
               <FormularioNovoDependente onAddDependente={handleAddDependente} />
               </>
             )}
@@ -204,4 +188,8 @@ export default function Transferir() {
       </main>
     </div>
     );
+
+    
   }
+
+

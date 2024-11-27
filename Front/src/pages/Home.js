@@ -76,9 +76,9 @@ export default function Home() {
         </div>
 
         <div className="acoes">
-          <button className="botao transferir">Transferir</button>
-          <button className="botao sacar">Sacar</button>
-          <button className="botao depositar">Depositar</button>
+          <button className="botao transferir"><Link to="/Transferencia">Transferir</Link></button>
+          <button className="botao sacar"><Link to="/Sacar">Sacar</Link></button>
+          <button className="botao depositar"><Link to="/Depositar">Depositar</Link></button>
         </div>
       </main>
     </div>
