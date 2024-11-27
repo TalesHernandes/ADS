@@ -11,7 +11,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/contas")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ContaController {
     @Autowired
     private ContaService contaService;

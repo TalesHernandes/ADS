@@ -7,7 +7,6 @@ import java.util.List;
 
 @RestController
 @RequestMapping("/api/extrato")
-@CrossOrigin(origins = "http://localhost:3000")
 public class ExtratoController {
     @Autowired
     private ExtratoService extratoService;
