@@ -8,7 +8,6 @@ import java.util.List;
 @RestController
 @RequestMapping("/api/extrato")
 public class ExtratoController {
-
     @Autowired
     private ExtratoService extratoService;
 
