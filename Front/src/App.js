@@ -5,6 +5,7 @@ import Home from "./pages/Home";
 import Deposito from "./pages/Deposito";
 import Saque from "./pages/Saque";
 import Limite from "./pages/Limite";
+import Extrato from "./pages/Extrato";
 
 export default function App() {
   return (
@@ -16,6 +17,7 @@ export default function App() {
         <Route path="/Depositar" element={<Deposito />} />
         <Route path="/Sacar" element={<Saque />} />
         <Route path="/AlterarLimite" element={<Limite />} />
+        <Route path="/Extrato" element={<Extrato />} />
       </Routes>
     </Router>
   );

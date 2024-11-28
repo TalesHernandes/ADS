@@ -3,6 +3,7 @@ import logoStar from "../imgs/Star.png";
 import notifica from "../imgs/Bell.png";
 import userIcon from "../imgs/UserIcon.png";
 import { Link } from "react-router-dom";
+import Extrato from "./Extrato";
 
 export default function Home() {
   return (
@@ -69,9 +70,7 @@ export default function Home() {
             <p className="limite-conta">
               Limite de Conta: <strong className="limite">1.000,00 R$</strong>
             </p>
-            <a href="#" className="extrato">
-              Extrato
-            </a>
+            <Link to="/Extrato">Extrato</Link>
           </div>
         </div>
 

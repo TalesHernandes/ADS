@@ -23,7 +23,7 @@ export default function Transferir() {
       
       const fetchPessoa = async () => {
         try {
-            const response = await axios.get('http://54.80.120.211:8080/api/pessoas/4');
+            const response = await axios.get('http://54.156.4.81:8080/api/pessoas/4');
             setPessoa(response.data);
             setIsAdmin(response.data.admin);
         } catch (error) {
@@ -38,7 +38,7 @@ export default function Transferir() {
       
       const fetchDependentes = async () => {
           try {
-              const response = await axios.get('http://54.80.120.211:8080/api/pessoas');
+              const response = await axios.get('http://54.156.4.81:8080/api/pessoas');
               const dependentesFiltrados = response.data.filter(pessoa => !pessoa.admin); // Filtrando apenas dependentes
               setDependentes(dependentesFiltrados);
           } catch (error) {
@@ -67,7 +67,7 @@ export default function Transferir() {
     const handleAddDependente = async (novoDependente) => {
       try {
           // Envia os dados do novo dependente e as contas em uma única requisição
-          const response = await axios.post('http://54.80.120.211:8080/api/pessoas', novoDependente);
+          const response = await axios.post('http://54.156.4.81:8080/api/pessoas', novoDependente);
           console.log('Resposta da API:', response.data);
           
           // Adiciona o novo dependente à lista de dependentes
@@ -91,7 +91,7 @@ export default function Transferir() {
       };
   
       try {
-          const response = await axios.post(`http://54.80.120.211:8080/api/contas/${pessoaId}`, [novaConta]);
+          const response = await axios.post(`http://54.156.4.81:8080/api/contas/${pessoaId}`, [novaConta]);
           console.log('Nova conta criada:', response.data);
   
           if (dependenteSelecionado) {

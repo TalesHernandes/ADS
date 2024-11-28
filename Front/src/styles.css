@@ -406,7 +406,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 15px;
-  width: calc(100% - 100px);
+  width: calc(100% -100px);
   padding: 20px;
   background-color: rgba(0, 0, 0, 0.15);
   border-radius: 10px;
